@@ -137,45 +137,82 @@ function showModalOnScroll() {
   window.addEventListener('scroll', showModalOnScroll);
   
   
+// calculating
+let genderBtns =document.querySelectorAll('#gender .calculating__choose-item')
+let inputs = document.querySelectorAll('.calculating__choose_medium input')
+let actBtns = document.querySelectorAll('.calculating__choose_big .calculating__choose-item')
+let result_view = document.querySelector('#result')
+
+let userData = {
+    gender: "woman",
+}
+
+genderBtns.forEach( btn => {
+    btn.onclick = () => {
+        genderBtns.forEach(el => el.classList.remove ('calculating__choose-item_active'))
+        btn.classList.add('calculating__choose-item_active')
+        let key = btn.getAttribute('data-g')
+
+        userData.gender = key
+    }
+})
+
+inputs.forEach( inp => {
+    inp.onkeyup = () => {
+        userData[inp.id] = inp.value
+    }
+})
+
+actBtns.forEach( btn => {
+    btn.onclick = () => {
+        actBtns.forEach(el => el.classList.remove ('calculating__choose-item_active'))
+        btn.classList.add('calculating__choose-item_active')
+        let coefficient = +btn.getAttribute('data-act')
+        let result
+
+        const {gender, weight, height, age} = userData
+
+        if(gender === 'woman'){
+            result = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
+
+        }else {
+            result = 66.5 + (13.75 * weight) + (5.003 * height) - (6.775 * age);
+        }
+        result_view.innerHTML = Math.floor(result * coefficient)
+    
+    
+    }
+})
 
 
 
 
+// deadline
+
+let count = new Date("May 31, 2023 00:00:00").getTime()
+
+setInterval(() => {
+  let time = count - new Date().getTime()
+
+  let days = Math.floor(time / (1000 * 60 * 60 * 24))
+  let hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60))
+  let seconds = Math.floor((time % (1000 * 60)) / 1000)
+
+  document.querySelector("#days").innerHTML = days
+  document.querySelector("#hours").innerHTML = hours
+  document.querySelector("#minutes").innerHTML = minutes
+  document.querySelector("#seconds").innerHTML = seconds
+
+  if (time < 0) {
+    clearInterval(countdown)
+    document.querySelector("#timer").innerHTML = "Отсчет завершен"
+  }
+}, 1000);
 
 
 
 
-
-
-
-
-
-// let btn  = document.querySelectorAll('.btn');
-// // let modalOverlay = document.querySelector('.modal-overlay');
-// let modal = document.querySelector('.modal');
-
-// let modalCloseBtn = document.querySelector('.modal__close');
-
-
-// btn.onclick = () => {
-//     modal.style.display = 'block'
-// }
-
-// modalCloseBtn.onclick = () => {
-//     modal.style.display = 'none'
-// }
-// let btn  = document.querySelectorAll('.btn');
-// let modalOverlay = document.querySelector('.modal-overlay')
-// let modalCloseBtn = document.querySelector('.close-icon')
-
-
-// btn.onclick = () => {
-//     modalOverlay.style.display = 'block'
-// }
-
-// modalCloseBtn.onclick = () => {
-//     modalOverlay.style.display = 'none'
-// }
 
 
 
