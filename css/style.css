@@ -842,4 +842,23 @@ a {
 	.modal-btn:hover {
 	  background-color: #0062cc;
 	  } 
-  
+  /* plavnoct */
+  html {
+	scroll-behavior:smooth;
+  }
+  /* pozdravlenie */
+  .p_modal {
+	width: 400px;
+	height: 100px;
+	background-color: aquamarine;
+	border-radius: 10px;
+	position: absolute;
+	top: 0;
+	left: 35%;
+	z-index: 21;
+	display: none;
+	margin: 0 auto;
+	padding: 10px 10px 0 15px;
+	animation-name: fade;
+	animation-duration: 1.5s;
+  }
